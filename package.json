@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "client:product": "webpack --mode=production && cp src/client/index.html dist/client/index.html",
-        "client:dev": "webpack --mode=development && cp src/client/index.html dist/client/index.html && webpack-dev-server --inline --hot",
+        "client:dev": "webpack --mode=development && cp src/client/index.html dist/client/index.html && cp src/client/login.html dist/client/login.html && webpack-dev-server --inline --hot",
         "server:dev": "nodemon ./src/server/index.js",
         "lint": "eslint ./src/client --ext .tsx"
     },
@@ -19,6 +19,8 @@
         "dotenv": "^8.0.0",
         "express": "^4.17.0",
         "express-session": "^1.16.1",
+        "frameguard": "^3.1.0",
+        "helmet": "^3.18.0",
         "nonce": "^1.0.4",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",

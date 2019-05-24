@@ -20,6 +20,7 @@ class App extends React.Component {
             this.setState({ items: data.products });
         } catch (err) {
             console.log(err);
+            Response.redirect('/', 401);
         }
     };
     state = {
@@ -65,11 +66,13 @@ class App extends React.Component {
                 <Layout>
                     <Layout.Section>
                         <Card>
-                            <ResourceList
-                                resourceName={resourceName}
-                                items={this.state.items}
-                                renderItem={this.renderItem}
-                            />
+                            {this.state.items.length && (
+                                <ResourceList
+                                    resourceName={resourceName}
+                                    items={this.state.items}
+                                    renderItem={this.renderItem}
+                                />
+                            )}
                         </Card>
                     </Layout.Section>
                 </Layout>

@@ -62,8 +62,6 @@ class ProductProvider extends Container<IState> {
     };
 
     handleDropImage = async (files: Array<File>, rejectedFiles: Array<File>, hasError: boolean) => {
-        console.log(files);
-        console.log(rejectedFiles);
         await this.setState({
             files,
             rejectedFiles,
@@ -73,15 +71,12 @@ class ProductProvider extends Container<IState> {
     };
 
     uploadImage = async (files: Array<File>, id: string) => {
-        // console.log('files to upload:', files);
         if (files.length) {
             files.map((file: any) => {
                 const filename = file.name;
-                // console.log(name);
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = async () => {
-                    // console.log((reader.result as string).split(',')[1]);
                     const base64 = (reader.result as string).split(',')[1].trim();
                     try {
                         const response = await fetch(`/api/${id}/upLoadImage`, {
@@ -98,6 +93,7 @@ class ProductProvider extends Container<IState> {
                         const data = await response.json();
                     } catch (err) {
                         console.log(err);
+                        Response.redirect('/', 401);
                     }
                 };
             });
@@ -120,6 +116,7 @@ class ProductProvider extends Container<IState> {
             });
         } catch (err) {
             console.log(err);
+            Response.redirect('/', 401);
         }
     };
 }

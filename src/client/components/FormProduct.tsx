@@ -32,7 +32,6 @@ interface IProps {
 
 class FormProduct extends React.Component<IProps> {
     componentDidMount = async () => {
-        // console.log(this.props.id);
         await this.props.getProductById(this.props.id);
     };
 
@@ -51,19 +50,24 @@ class FormProduct extends React.Component<IProps> {
         e.persist();
         const { id, title, body_html } = await this.props.state;
         e.preventDefault();
-        const response = await fetch('/api/updateProduct', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id,
-                title,
-                body_html
-            })
-        });
-        const data = await response.json();
+        try {
+            const response = await fetch('/api/updateProduct', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id,
+                    title,
+                    body_html
+                })
+            });
+            const data = await response.json();
+        } catch (err) {
+            console.log(err);
+            Response.redirect('/', 401);
+        }
         await this.toggleToast();
         await this.props.setDisableButton();
     };

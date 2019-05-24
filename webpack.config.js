@@ -35,7 +35,7 @@ const config = {
         ]
     },
     devServer: {
-        contentBase: DIST_DIR,
+        contentBase: path.join(DIST_DIR, '/index.html'),
         publicPath: '/dist/client',
         compress: true,
         port: 8080,
